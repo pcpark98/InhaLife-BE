@@ -8,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import java.util.List;
+
 import static javax.persistence.FetchType.*;
 
 @Entity
@@ -26,4 +28,7 @@ public class Professor {
     @Column(length = 5)
     @Size(max = 5)
     private String name;
+
+    @OneToMany(mappedBy = "professor")
+    private List<Subject> subjects;
 }

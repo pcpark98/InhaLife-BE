@@ -1,6 +1,7 @@
 package com.capstonedesign.inhalife.department.domain;
 
 import com.capstonedesign.inhalife.subject.domain.Professor;
+import com.capstonedesign.inhalife.subject.domain.Subject;
 import com.capstonedesign.inhalife.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,4 +29,7 @@ public class Department {
 
     @OneToMany(mappedBy = "department")
     private List<Professor> professors;
+
+    @OneToMany(mappedBy = "department")
+    private List<Subject> subjects;
 }
