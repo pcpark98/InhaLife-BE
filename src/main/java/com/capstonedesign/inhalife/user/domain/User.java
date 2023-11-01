@@ -72,4 +72,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<RegionOfUser> regionOfUserList;
+
+    @OneToMany(mappedBy = "user")
+    private List<TermAgreement> termAgreementList;
 }
