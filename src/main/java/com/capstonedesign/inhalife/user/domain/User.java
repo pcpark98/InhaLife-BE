@@ -66,4 +66,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<SubjectBookmark> subjectBookmarkList;
+
+    @OneToMany(mappedBy = "user")
+    private List<HobbyOfUser> hobbyList;
 }
