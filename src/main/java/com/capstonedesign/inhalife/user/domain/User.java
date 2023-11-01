@@ -69,4 +69,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<HobbyOfUser> hobbyList;
+
+    @OneToMany(mappedBy = "user")
+    private List<RegionOfUser> regionOfUserList;
 }

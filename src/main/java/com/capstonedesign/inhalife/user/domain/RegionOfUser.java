@@ -1,6 +1,5 @@
 package com.capstonedesign.inhalife.user.domain;
 
-import com.capstonedesign.inhalife.subject.domain.Subject;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,14 +12,14 @@ import static javax.persistence.FetchType.LAZY;
 @Table(
         uniqueConstraints = {
                 @UniqueConstraint(
-                        columnNames = {"user_index", "hobby_index"}
+                        columnNames = {"user_index", "region_index"}
                 )
         }
 )
-public class HobbyOfUser {
+public class RegionOfUser {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "hobby_of_user_index")
+    @Column(name = "region_of_user_index")
     private Long id;
 
     @ManyToOne(fetch = LAZY)
@@ -28,6 +27,6 @@ public class HobbyOfUser {
     private User user;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "hobby_index")
-    private Hobby hobby;
+    @JoinColumn(name = "region_index")
+    private Region region;
 }
