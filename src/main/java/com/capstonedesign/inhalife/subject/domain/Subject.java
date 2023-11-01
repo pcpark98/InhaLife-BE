@@ -58,4 +58,7 @@ public class Subject {
 
     @OneToMany(mappedBy = "subject")
     private List<SubjectReview> subjectReviewList;
+
+    @OneToMany(mappedBy = "subject")
+    private List<SubjectBookmark> subjectBookmarkList;
 }
