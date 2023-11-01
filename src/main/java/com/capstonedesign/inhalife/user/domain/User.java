@@ -1,6 +1,7 @@
 package com.capstonedesign.inhalife.user.domain;
 
 import com.capstonedesign.inhalife.department.domain.Department;
+import com.capstonedesign.inhalife.subject.domain.SubjectReview;
 import com.capstonedesign.inhalife.subject.domain.SubjectTaken;
 import lombok.Getter;
 import lombok.Setter;
@@ -58,4 +59,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<SubjectTaken> subjectTakenList;
+
+    @OneToMany(mappedBy = "user")
+    private List<SubjectReview> subjectReviewList;
 }

@@ -55,4 +55,7 @@ public class Subject {
 
     @OneToMany(mappedBy = "subject")
     private List<SubjectTaken> subjectTakenList;
+
+    @OneToMany(mappedBy = "subject")
+    private List<SubjectReview> subjectReviewList;
 }
