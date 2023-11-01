@@ -1,6 +1,7 @@
 package com.capstonedesign.inhalife.user.domain;
 
 import com.capstonedesign.inhalife.department.domain.Department;
+import com.capstonedesign.inhalife.subject.domain.SubjectTaken;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static javax.persistence.FetchType.*;
 
@@ -53,4 +55,7 @@ public class User {
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "user")
+    private List<SubjectTaken> subjectTakenList;
 }

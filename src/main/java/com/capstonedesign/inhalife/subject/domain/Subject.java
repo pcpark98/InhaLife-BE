@@ -9,6 +9,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import java.util.List;
+
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
@@ -50,4 +52,7 @@ public class Subject {
     @NotNull
     @Column(name = "is_online")
     private Boolean isOnline;
+
+    @OneToMany(mappedBy = "subject")
+    private List<SubjectTaken> subjectTakenList;
 }
