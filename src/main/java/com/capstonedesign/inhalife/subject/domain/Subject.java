@@ -44,7 +44,7 @@ public class Subject {
 
     @NotNull
     @Column(name = "school_year")
-    private Integer schoolYear;
+    private int schoolYear;
 
     @NotNull
     private Boolean semester;

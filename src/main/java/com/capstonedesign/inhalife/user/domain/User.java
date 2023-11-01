@@ -45,10 +45,10 @@ public class User {
 
     @NotNull
     @Column(name = "school_year")
-    private Integer schoolYear;
+    private int schoolYear;
 
     @NotNull
-    private Integer age;
+    private int age;
 
     @NotNull
     private Boolean gender;
