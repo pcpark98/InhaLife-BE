@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -41,4 +42,7 @@ public class Article {
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "article")
+    private List<ArticleImg> articleImgs;
 }
