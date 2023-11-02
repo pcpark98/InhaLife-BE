@@ -1,6 +1,7 @@
 package com.capstonedesign.inhalife.user.domain;
 
 import com.capstonedesign.inhalife.board.domain.Article;
+import com.capstonedesign.inhalife.board.domain.ArticleBookmark;
 import com.capstonedesign.inhalife.board.domain.ArticleFavorite;
 import com.capstonedesign.inhalife.board.domain.BoardBookmark;
 import com.capstonedesign.inhalife.department.domain.Department;
@@ -87,4 +88,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<ArticleFavorite> articleFavoriteList;
+
+    @OneToMany(mappedBy = "user")
+    private List<ArticleBookmark> articleBookmarkList;
 }
