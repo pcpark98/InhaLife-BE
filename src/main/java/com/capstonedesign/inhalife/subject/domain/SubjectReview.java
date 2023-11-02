@@ -25,8 +25,7 @@ import static javax.persistence.FetchType.LAZY;
 )
 public class SubjectReview {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subject_review_index")
     private Long id;
 

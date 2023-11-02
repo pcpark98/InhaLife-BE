@@ -22,8 +22,7 @@ import static javax.persistence.FetchType.LAZY;
 )
 public class SubjectBookmark {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subject_bookmark_index")
     private Long id;
 

@@ -12,8 +12,7 @@ import java.util.List;
 @Getter @Setter
 public class Region {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "region_index")
     private Long id;
 
