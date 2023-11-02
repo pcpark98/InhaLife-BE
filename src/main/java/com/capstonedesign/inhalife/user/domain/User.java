@@ -91,4 +91,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<ArticleComplain> articleComplainList;
+
+    @OneToMany(mappedBy = "user")
+    private List<ArticleComment> articleComments;
 }
