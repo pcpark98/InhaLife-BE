@@ -22,8 +22,10 @@ public class DepartmentController {
     public ResponseEntity<List<DepartmentListResponse>> getAllDepartmentList() {
         List<DepartmentListResponse> departmentList = departmentService.getAll().stream()
                 .map(d -> {
-                            return new DepartmentListResponse(d.getName());
-                        })
+                            return new DepartmentListResponse(
+                                    d.getId(),
+                                    d.getName());
+                })
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(departmentList);
