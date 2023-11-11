@@ -1,13 +1,16 @@
 package com.capstonedesign.inhalife.user.service;
 
 import com.capstonedesign.inhalife.user.domain.HobbyOfUser;
+import com.capstonedesign.inhalife.user.dto.response.GetHobbyResponse;
 import com.capstonedesign.inhalife.user.exception.DuplicatedHobbyOfUserException;
 import com.capstonedesign.inhalife.user.repository.HobbyOfUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,5 +31,15 @@ public class HobbyOfUserService {
         Optional<HobbyOfUser> hobbyOfUser = hobbyOfUserRepository.findByUserIndexAndHobbyIndex(userId, hobbyId);
         if(hobbyOfUser.isPresent()) return true;
         else return false;
+    }
+
+    public List<GetHobbyResponse> getAllHobby(Long userId) {
+        return hobbyOfUserRepository.findByUserIndex(userId).stream()
+                .map( hou -> {
+                    return new GetHobbyResponse(
+                            hou.getHobby().getId(),
+                            hou.getHobby().getName());
+                })
+                .collect(Collectors.toList());
     }
 }
