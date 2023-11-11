@@ -9,7 +9,6 @@ import com.capstonedesign.inhalife.user.dto.response.LoginResponse;
 import com.capstonedesign.inhalife.user.service.UserService;
 import com.capstonedesign.inhalife.user.util.SessionUtil;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.manager.util.SessionUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
