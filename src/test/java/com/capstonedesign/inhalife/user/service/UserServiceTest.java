@@ -6,6 +6,7 @@ import com.capstonedesign.inhalife.department.repository.DepartmentRepository;
 import com.capstonedesign.inhalife.user.domain.User;
 import com.capstonedesign.inhalife.user.exception.DuplicatedEmailException;
 import com.capstonedesign.inhalife.user.exception.DuplicatedNicknameException;
+import com.capstonedesign.inhalife.user.exception.NotExistedUserException;
 import com.capstonedesign.inhalife.user.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -130,5 +131,46 @@ public class UserServiceTest {
 
         // then
         // DuplicatedNicknameException 발생
+    }
+
+    @Test
+    public void 로그인() {
+        // given
+        // configure department
+        Department 학과 = new Department("컴퓨터공학과");
+        departmentRepository.save(학과);
+
+        // configure user info
+        User user = new User(
+                "email@email.com",
+                "password",
+                학과,
+                "nickname",
+                1,
+                20,
+                true
+        );
+        userRepository.save(user);
+
+
+        // when
+        User 로그인한_유저 = userService.login("email@email.com", "password");
+
+
+        // then
+        assertThat(로그인한_유저.getNickname()).isEqualTo(user.getNickname());
+    }
+
+    @Test(expected = NotExistedUserException.class)
+    public void 로그인_실패() {
+        // given
+
+
+        // when
+        User 로그인한_유저 = userService.login("email@email.com", "password");
+
+
+        // then
+        // NotExistedUserException 발생
     }
 }

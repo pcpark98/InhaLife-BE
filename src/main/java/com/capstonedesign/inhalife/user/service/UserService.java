@@ -39,6 +39,12 @@ public class UserService {
         return user.get();
     }
 
+    public User login(String email, String password) {
+        Optional<User> user = userRepository.login(email, password);
+        if(!user.isPresent()) throw new NotExistedUserException();
+
+        return user.get();
+    }
 
     @Transactional
     public void deleteUser(Long id) {
