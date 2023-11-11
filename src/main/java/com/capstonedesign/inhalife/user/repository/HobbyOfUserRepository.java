@@ -26,4 +26,8 @@ public class HobbyOfUserRepository {
     public List<HobbyOfUser> findByUserIndex(Long userId) {
         return hobbyOfUserJpaRepository.findAllByUser_Id(userId);
     }
+
+    public void delete(HobbyOfUser hobbyOfUser) {
+        hobbyOfUserJpaRepository.deleteById(hobbyOfUser.getId());
+    }
 }

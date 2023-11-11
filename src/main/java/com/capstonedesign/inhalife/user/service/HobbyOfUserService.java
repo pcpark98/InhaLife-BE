@@ -42,4 +42,9 @@ public class HobbyOfUserService {
                 })
                 .collect(Collectors.toList());
     }
+
+    public void deleteHobby(Long userId, Long hobbyId) {
+        Optional<HobbyOfUser> hobbyOfUser = hobbyOfUserRepository.findByUserIndexAndHobbyIndex(userId, hobbyId);
+        hobbyOfUserRepository.delete(hobbyOfUser.get());
+    }
 }

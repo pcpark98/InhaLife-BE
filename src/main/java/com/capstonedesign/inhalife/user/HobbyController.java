@@ -5,6 +5,7 @@ import com.capstonedesign.inhalife.user.domain.HobbyOfUser;
 import com.capstonedesign.inhalife.user.domain.User;
 import com.capstonedesign.inhalife.user.dto.request.SetHobbyRequest;
 import com.capstonedesign.inhalife.user.dto.response.GetHobbyResponse;
+import com.capstonedesign.inhalife.user.exception.NotExistedHobbyException;
 import com.capstonedesign.inhalife.user.service.HobbyOfUserService;
 import com.capstonedesign.inhalife.user.service.HobbyService;
 import com.capstonedesign.inhalife.user.service.UserService;
@@ -16,7 +17,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/hobby")
 @RequiredArgsConstructor
 public class HobbyController {
 
@@ -24,7 +24,7 @@ public class HobbyController {
     private final HobbyService hobbyService;
     private final HobbyOfUserService hobbyOfUserService;
 
-    @PostMapping
+    @PostMapping("/hobby")
     public ResponseEntity<Void> setHobby(
             @RequestBody @Valid SetHobbyRequest request) {
 
@@ -37,7 +37,7 @@ public class HobbyController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/user/{userIndex}")
+    @GetMapping("/user/{userIndex}/hobbies")
     public ResponseEntity<List<GetHobbyResponse>> getAllHobby(
             @PathVariable("userIndex") Long userId) {
         User user = userService.getById(userId);
@@ -45,5 +45,20 @@ public class HobbyController {
         List<GetHobbyResponse> hobbyList = hobbyOfUserService.getAllHobby(user.getId());
 
         return ResponseEntity.ok(hobbyList);
+    }
+
+    @DeleteMapping("/user/{userIndex}/hobby/{hobbyIndex}")
+    public ResponseEntity<Void> deleteHobby(
+            @PathVariable("userIndex") Long userId,
+            @PathVariable("hobbyIndex") Long hobbyId) {
+        User user = userService.getById(userId);
+        Hobby hobby = hobbyService.getById(hobbyId);
+
+        if(!hobbyOfUserService.isHobby(user.getId(), hobby.getId()))
+            throw new NotExistedHobbyException();
+
+        hobbyOfUserService.deleteHobby(user.getId(), hobby.getId());
+
+        return ResponseEntity.ok().build();
     }
 }
