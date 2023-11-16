@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,5 +23,10 @@ public class Region {
     private String name;
 
     @OneToMany(mappedBy = "region")
-    private List<RegionOfUser> userList;
+    private List<RegionOfUser> userList = new ArrayList<>();
+
+    public Region(String name) {
+        this.name = name;
+    }
+
 }

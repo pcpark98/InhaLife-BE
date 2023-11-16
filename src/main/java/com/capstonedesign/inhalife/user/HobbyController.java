@@ -9,6 +9,7 @@ import com.capstonedesign.inhalife.user.exception.NotExistedHobbyException;
 import com.capstonedesign.inhalife.user.service.HobbyOfUserService;
 import com.capstonedesign.inhalife.user.service.HobbyService;
 import com.capstonedesign.inhalife.user.service.UserService;
+import com.sun.xml.bind.v2.TODO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,8 @@ public class HobbyController {
     private final UserService userService;
     private final HobbyService hobbyService;
     private final HobbyOfUserService hobbyOfUserService;
+
+    // TODO: 모든 취미를 조회하는 API 필요
 
     @PostMapping("/hobby")
     public ResponseEntity<Void> setHobby(
