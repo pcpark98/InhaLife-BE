@@ -43,6 +43,7 @@ public class HobbyOfUserService {
                 .collect(Collectors.toList());
     }
 
+    // TODO: 존재하지 않는 경우에 대한 예외처리 필요
     public void deleteHobby(Long userId, Long hobbyId) {
         Optional<HobbyOfUser> hobbyOfUser = hobbyOfUserRepository.findByUserIndexAndHobbyIndex(userId, hobbyId);
         hobbyOfUserRepository.delete(hobbyOfUser.get());

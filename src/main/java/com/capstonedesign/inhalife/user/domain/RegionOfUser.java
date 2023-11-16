@@ -29,4 +29,9 @@ public class RegionOfUser {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "region_index")
     private Region region;
+
+    public RegionOfUser(User user, Region region) {
+        this.user = user;
+        this.region = region;
+    }
 }
