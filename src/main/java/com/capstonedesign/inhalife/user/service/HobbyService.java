@@ -1,6 +1,7 @@
 package com.capstonedesign.inhalife.user.service;
 
 import com.capstonedesign.inhalife.user.domain.Hobby;
+import com.capstonedesign.inhalife.user.dto.response.GetHobbyResponse;
 import com.capstonedesign.inhalife.user.exception.NotExistedHobbyException;
 import com.capstonedesign.inhalife.user.repository.HobbyRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -26,7 +28,14 @@ public class HobbyService {
         return hobby.get();
     }
 
-    public List<Hobby> getAll() {
-        return hobbyRepository.findAll();
+    public List<GetHobbyResponse> getAll() {
+
+        return hobbyRepository.findAll().stream()
+                .map( h -> {
+                    return new GetHobbyResponse(
+                            h.getId(),
+                            h.getName());
+                })
+                .collect(Collectors.toList());
     }
 }

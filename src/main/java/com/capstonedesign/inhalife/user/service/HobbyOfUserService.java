@@ -3,6 +3,7 @@ package com.capstonedesign.inhalife.user.service;
 import com.capstonedesign.inhalife.user.domain.HobbyOfUser;
 import com.capstonedesign.inhalife.user.dto.response.GetHobbyResponse;
 import com.capstonedesign.inhalife.user.exception.DuplicatedHobbyOfUserException;
+import com.capstonedesign.inhalife.user.exception.NotExistedHobbyOfUserException;
 import com.capstonedesign.inhalife.user.repository.HobbyOfUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -43,9 +44,10 @@ public class HobbyOfUserService {
                 .collect(Collectors.toList());
     }
 
-    // TODO: 존재하지 않는 경우에 대한 예외처리 필요
     public void deleteHobby(Long userId, Long hobbyId) {
         Optional<HobbyOfUser> hobbyOfUser = hobbyOfUserRepository.findByUserIndexAndHobbyIndex(userId, hobbyId);
+        if(!hobbyOfUser.isPresent()) throw new NotExistedHobbyOfUserException();
+
         hobbyOfUserRepository.delete(hobbyOfUser.get());
     }
 }

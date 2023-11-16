@@ -21,8 +21,6 @@ public class HobbyServiceTest {
     @Autowired
     HobbyRepository hobbyRepository;
 
-    // TODO: 모든 취미를 조회할 수 있는거에 대한 테스트
-
     @Test
     public void 취미를_조회할수_있다() {
         // given

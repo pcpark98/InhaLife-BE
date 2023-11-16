@@ -25,7 +25,12 @@ public class HobbyController {
     private final HobbyService hobbyService;
     private final HobbyOfUserService hobbyOfUserService;
 
-    // TODO: 모든 취미를 조회하는 API 필요
+    @GetMapping("/hobby")
+    public ResponseEntity<List<GetHobbyResponse>> getAllHobby() {
+        List<GetHobbyResponse> hobbyList = hobbyService.getAll();
+
+        return ResponseEntity.ok(hobbyList);
+    }
 
     @PostMapping("/hobby")
     public ResponseEntity<Void> setHobby(
@@ -41,7 +46,7 @@ public class HobbyController {
     }
 
     @GetMapping("/user/{userIndex}/hobbies")
-    public ResponseEntity<List<GetHobbyResponse>> getAllHobby(
+    public ResponseEntity<List<GetHobbyResponse>> getUsersAllHobby(
             @PathVariable("userIndex") Long userId) {
         User user = userService.getById(userId);
 
