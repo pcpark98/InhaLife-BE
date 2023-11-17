@@ -78,9 +78,6 @@ public class User {
     private List<RegionOfUser> regionOfUserList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<TermAgreement> termAgreementList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user")
     private List<BoardBookmark> boardBookmarkList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
