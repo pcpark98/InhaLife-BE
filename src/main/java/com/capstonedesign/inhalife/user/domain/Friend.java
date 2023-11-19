@@ -1,13 +1,17 @@
 package com.capstonedesign.inhalife.user.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity
+@NoArgsConstructor
 @Getter @Setter
 @Table(
         uniqueConstraints = {
@@ -30,6 +34,15 @@ public class Friend {
 
     @NotNull
     @ColumnDefault("false")
-    @Column(columnDefinition = "TINYINT(1)")
     private boolean isFriend;
+
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    public Friend(Long fromUserIndex, Long toUserIndex) {
+        this.fromUserIndex = fromUserIndex;
+        this.toUserIndex = toUserIndex;
+        this.isFriend = false;
+    }
 }

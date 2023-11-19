@@ -3,7 +3,6 @@ package com.capstonedesign.inhalife.user.service;
 import com.capstonedesign.inhalife.user.domain.User;
 import com.capstonedesign.inhalife.user.exception.DuplicatedEmailException;
 import com.capstonedesign.inhalife.user.exception.DuplicatedNicknameException;
-import com.capstonedesign.inhalife.user.exception.DuplicatedUserException;
 import com.capstonedesign.inhalife.user.exception.NotExistedUserException;
 import com.capstonedesign.inhalife.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
