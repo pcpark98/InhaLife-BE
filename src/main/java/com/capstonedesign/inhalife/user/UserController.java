@@ -47,4 +47,7 @@ public class UserController {
                 .header("set-cookie", "sessionId="+uuid+"; Path=/; Secure; HttpOnly; SameSite=None")
                 .body(new LoginResponse(user.getId(), user.getNickname(), user.getDepartment().getName()));
     }
+
+
+    // TODO: 유저 아이디로 유저 정보 조회하기
 }

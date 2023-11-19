@@ -22,4 +22,9 @@ public class FriendRepository {
         Optional<Friend> friend = friendJpaRepository.findByFromUserIndexAndToUserIndex(fromUserIndex, toUserIndex);
         return friend;
     }
+
+    public List<Friend> findAllByFromUserIndexOrToUserIndex(Long userIndex) {
+        List<Friend> friendList = friendJpaRepository.findAllByFromUserIndexOrToUserIndex(userIndex, userIndex);
+        return friendList;
+    }
 }
