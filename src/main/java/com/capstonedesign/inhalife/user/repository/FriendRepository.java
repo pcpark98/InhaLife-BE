@@ -27,4 +27,9 @@ public class FriendRepository {
         List<Friend> friendList = friendJpaRepository.findAllByFromUserIndexOrToUserIndex(userIndex, userIndex);
         return friendList;
     }
+
+    public List<Friend> findAllByToUserIndexAndFriendIsFalse(Long userIndex) {
+        List<Friend> friendList = friendJpaRepository.findAllByToUserIndexAndIsFriendFalse(userIndex);
+        return friendList;
+    }
 }

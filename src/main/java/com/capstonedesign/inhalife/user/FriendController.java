@@ -45,4 +45,15 @@ public class FriendController {
 
         return ResponseEntity.ok(friendList);
     }
+
+    @GetMapping("/user/{userIndex}/friend/received")
+    public ResponseEntity<List<ReadFriendResponse>> getAllReceivedFriendRequest(
+            @PathVariable Long userIndex) {
+        authorizationService.checkSession(userIndex);
+
+        User user = userService.getById(userIndex);
+        List<ReadFriendResponse> friendRequestList = friendService.getAllReceivedFriendRequest(userIndex);
+
+        return ResponseEntity.ok(friendRequestList);
+    }
 }

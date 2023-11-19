@@ -66,11 +66,11 @@ public class FriendServiceTest {
         Long 생성한_아이디 = friendService.requestFriend(유저1, 유저2);
         Friend 조회한_친구 = friendService.getByFromUserIdAndToUserId(유저1.getId(), 유저2.getId());
 
-        boolean 신청_이후_친구여부 = 조회한_친구.isFriend();
+        boolean 신청_이후_친구여부 = 조회한_친구.getIsFriend();
 
         friendService.acceptFriend(유저2, 유저1);
 
-        boolean 수락_이후_친구여부 = 조회한_친구.isFriend();
+        boolean 수락_이후_친구여부 = 조회한_친구.getIsFriend();
 
         // then
         assertEquals(조회한_친구.getId(), 생성한_아이디);
@@ -256,5 +256,70 @@ public class FriendServiceTest {
         assertEquals(2, 유저1의_친구목록.size());
         assertEquals(1, 유저2의_친구목록.size());
         assertEquals(1, 유저3의_친구목록.size());
+    }
+
+    @Test
+    public void 모든_친구_요청_리스트_조회() {
+        // given
+        // configure department
+        Department 학과 = new Department("컴퓨터공학과");
+        departmentRepository.save(학과);
+
+        // configure user info
+        User 유저1 = new User(
+                "email@email.com",
+                "password",
+                학과,
+                "nickname",
+                1,
+                20,
+                true
+        );
+        User 유저2 = new User(
+                "email2@email.com",
+                "password2",
+                학과,
+                "nickname2",
+                1,
+                20,
+                true
+        );
+        User 유저3 = new User(
+                "email3@email.com",
+                "password3",
+                학과,
+                "nickname3",
+                1,
+                20,
+                true
+        );
+        User 유저4 = new User(
+                "email4@email.com",
+                "password4",
+                학과,
+                "nickname4",
+                1,
+                20,
+                true
+        );
+        userRepository.save(유저1);
+        userRepository.save(유저2);
+        userRepository.save(유저3);
+        userRepository.save(유저4);
+
+        // configure friend relationship
+        friendService.requestFriend(유저2, 유저1);
+        friendService.acceptFriend(유저1, 유저2);
+
+        friendService.requestFriend(유저3, 유저1);
+        friendService.requestFriend(유저4, 유저1);
+
+
+        // when
+        List<ReadFriendResponse> 유저1이_받은_친구요청 = friendService.getAllReceivedFriendRequest(유저1.getId());
+
+
+        // then
+        assertEquals(2, 유저1이_받은_친구요청.size());
     }
 }

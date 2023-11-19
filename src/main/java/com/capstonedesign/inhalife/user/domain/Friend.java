@@ -34,7 +34,7 @@ public class Friend {
 
     @NotNull
     @ColumnDefault("false")
-    private boolean isFriend;
+    private Boolean isFriend;
 
     @CreationTimestamp
     @Column(name = "created_at")

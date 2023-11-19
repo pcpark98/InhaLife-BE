@@ -29,7 +29,7 @@ public class FriendService {
     public Long requestFriend(User fromUser, User toUser) {
         Optional<Friend> duplicatedFriend = friendRepository.findByFromUserIndexAndToUserIndex(fromUser.getId(), toUser.getId());
         if(duplicatedFriend.isPresent()) {
-            if(duplicatedFriend.get().isFriend()) throw new DuplicatedFriendException();
+            if(duplicatedFriend.get().getIsFriend()) throw new DuplicatedFriendException();
             else throw new DuplicatedFriendRequestException();
         }
 
@@ -52,9 +52,9 @@ public class FriendService {
         Optional<Friend> friend = friendRepository.findByFromUserIndexAndToUserIndex(toUser.getId(), fromUser.getId());
 
         if(!friend.isPresent()) throw new NotExistedFriendException();
-        if(friend.get().isFriend()) throw new DuplicatedFriendException();
+        if(friend.get().getIsFriend()) throw new DuplicatedFriendException();
 
-        friend.get().setFriend(true);
+        friend.get().setIsFriend(true);
 
         return friend.get().getId();
     }
@@ -67,6 +67,31 @@ public class FriendService {
             User friendUser;
             if(!friend.getFromUserIndex().equals(userId)) friendUser = userRepository.findById(friend.getFromUserIndex()).get();
             else friendUser = userRepository.findById(friend.getToUserIndex()).get();
+
+            responseList.add(
+                    new ReadFriendResponse(
+                            friend.getId(),
+                            friendUser.getId(),
+                            friendUser.getDepartment().getName(),
+                            friendUser.getEmail(),
+                            friendUser.getNickname(),
+                            friendUser.getSchoolYear(),
+                            friendUser.getAge(),
+                            friendUser.isGender(),
+                            friend.getCreatedAt()
+                    )
+            );
+        });
+
+        return responseList;
+    }
+
+    public List<ReadFriendResponse> getAllReceivedFriendRequest(Long userId) {
+        List<ReadFriendResponse> responseList = new ArrayList<>();
+
+        List<Friend> friendList = friendRepository.findAllByToUserIndexAndFriendIsFalse(userId);
+        friendList.forEach(friend -> {
+            User friendUser = userRepository.findById(friend.getFromUserIndex()).get();
 
             responseList.add(
                     new ReadFriendResponse(
