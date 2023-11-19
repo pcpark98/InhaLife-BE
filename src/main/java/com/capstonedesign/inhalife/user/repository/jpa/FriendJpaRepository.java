@@ -13,4 +13,6 @@ public interface FriendJpaRepository extends JpaRepository<Friend, Long> {
     List<Friend> findAllByFromUserIndexOrToUserIndex(Long fromUserInedx, Long toUserIndex);
 
     List<Friend> findAllByToUserIndexAndIsFriendFalse(Long toUserId);
+
+    List<Friend> findAllByFromUserIndexAndIsFriendFalse(Long fromUserId);
 }

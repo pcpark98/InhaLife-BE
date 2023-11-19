@@ -110,4 +110,29 @@ public class FriendService {
 
         return responseList;
     }
+
+    public List<ReadFriendResponse> getAllSendFriendRequest(Long userId) {
+        List<ReadFriendResponse> responseList = new ArrayList<>();
+
+        List<Friend> friendList = friendRepository.findAllByFromUserIndexAndIsFriendFalse(userId);
+        friendList.forEach(friend -> {
+            User friendUser = userRepository.findById(friend.getToUserIndex()).get();
+
+            responseList.add(
+                    new ReadFriendResponse(
+                            friend.getId(),
+                            friendUser.getId(),
+                            friendUser.getDepartment().getName(),
+                            friendUser.getEmail(),
+                            friendUser.getNickname(),
+                            friendUser.getSchoolYear(),
+                            friendUser.getAge(),
+                            friendUser.isGender(),
+                            friend.getCreatedAt()
+                    )
+            );
+        });
+
+        return responseList;
+    }
 }

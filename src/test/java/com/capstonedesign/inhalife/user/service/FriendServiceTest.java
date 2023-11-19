@@ -259,7 +259,7 @@ public class FriendServiceTest {
     }
 
     @Test
-    public void 모든_친구_요청_리스트_조회() {
+    public void 모든_받은_친구_요청_리스트_조회() {
         // given
         // configure department
         Department 학과 = new Department("컴퓨터공학과");
@@ -321,5 +321,70 @@ public class FriendServiceTest {
 
         // then
         assertEquals(2, 유저1이_받은_친구요청.size());
+    }
+
+    @Test
+    public void 모든_보낸_친구_요청_리스트_조회() {
+        // given
+        // configure department
+        Department 학과 = new Department("컴퓨터공학과");
+        departmentRepository.save(학과);
+
+        // configure user info
+        User 유저1 = new User(
+                "email@email.com",
+                "password",
+                학과,
+                "nickname",
+                1,
+                20,
+                true
+        );
+        User 유저2 = new User(
+                "email2@email.com",
+                "password2",
+                학과,
+                "nickname2",
+                1,
+                20,
+                true
+        );
+        User 유저3 = new User(
+                "email3@email.com",
+                "password3",
+                학과,
+                "nickname3",
+                1,
+                20,
+                true
+        );
+        User 유저4 = new User(
+                "email4@email.com",
+                "password4",
+                학과,
+                "nickname4",
+                1,
+                20,
+                true
+        );
+        userRepository.save(유저1);
+        userRepository.save(유저2);
+        userRepository.save(유저3);
+        userRepository.save(유저4);
+
+        // configure friend relationship
+        friendService.requestFriend(유저1, 유저2);
+        friendService.acceptFriend(유저2, 유저1);
+
+        friendService.requestFriend(유저1, 유저3);
+        friendService.requestFriend(유저1, 유저4);
+
+
+        // when
+        List<ReadFriendResponse> 유저1이_보낸_친구요청 = friendService.getAllSendFriendRequest(유저1.getId());
+
+
+        // then
+        assertEquals(2, 유저1이_보낸_친구요청.size());
     }
 }
