@@ -46,8 +46,8 @@ public class RegionController {
 
     @GetMapping("/user/{userIndex}/regions")
     public ResponseEntity<List<GetRegionResponse>> getUsersAllRegion(
-            @PathVariable("userIndex") Long userId) {
-        User user = userService.getById(userId);
+            @PathVariable Long userIndex) {
+        User user = userService.getById(userIndex);
 
         List<GetRegionResponse> regionList = regionOfUserService.getUsersAllRegion(user.getId());
 
@@ -56,10 +56,10 @@ public class RegionController {
 
     @DeleteMapping("/user/{userIndex}/region/{regionIndex}")
     public ResponseEntity<Void> deleteRegion(
-            @PathVariable("userIndex") Long userId,
-            @PathVariable("regionIndex") Long regionId) {
-        User user = userService.getById(userId);
-        Region region = regionService.getById(regionId);
+            @PathVariable Long userIndex,
+            @PathVariable Long regionIndex) {
+        User user = userService.getById(userIndex);
+        Region region = regionService.getById(regionIndex);
 
         if(!regionOfUserService.isRegion(user.getId(), region.getId()))
             throw new NotExistedRegionOfUserException();

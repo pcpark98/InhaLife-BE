@@ -9,7 +9,6 @@ import com.capstonedesign.inhalife.user.exception.NotExistedHobbyException;
 import com.capstonedesign.inhalife.user.service.HobbyOfUserService;
 import com.capstonedesign.inhalife.user.service.HobbyService;
 import com.capstonedesign.inhalife.user.service.UserService;
-import com.sun.xml.bind.v2.TODO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,8 +46,8 @@ public class HobbyController {
 
     @GetMapping("/user/{userIndex}/hobbies")
     public ResponseEntity<List<GetHobbyResponse>> getUsersAllHobby(
-            @PathVariable("userIndex") Long userId) {
-        User user = userService.getById(userId);
+            @PathVariable Long userIndex) {
+        User user = userService.getById(userIndex);
 
         List<GetHobbyResponse> hobbyList = hobbyOfUserService.getAllHobby(user.getId());
 
@@ -57,10 +56,10 @@ public class HobbyController {
 
     @DeleteMapping("/user/{userIndex}/hobby/{hobbyIndex}")
     public ResponseEntity<Void> deleteHobby(
-            @PathVariable("userIndex") Long userId,
-            @PathVariable("hobbyIndex") Long hobbyId) {
-        User user = userService.getById(userId);
-        Hobby hobby = hobbyService.getById(hobbyId);
+            @PathVariable Long userIndex,
+            @PathVariable Long hobbyIndex) {
+        User user = userService.getById(userIndex);
+        Hobby hobby = hobbyService.getById(hobbyIndex);
 
         if(!hobbyOfUserService.isHobby(user.getId(), hobby.getId()))
             throw new NotExistedHobbyException();
