@@ -6,13 +6,12 @@ import com.capstonedesign.inhalife.user.domain.User;
 import com.capstonedesign.inhalife.user.dto.request.LoginRequest;
 import com.capstonedesign.inhalife.user.dto.request.SignUpRequest;
 import com.capstonedesign.inhalife.user.dto.response.LoginResponse;
+import com.capstonedesign.inhalife.user.dto.response.ReadUserResponse;
 import com.capstonedesign.inhalife.user.service.UserService;
 import com.capstonedesign.inhalife.user.util.SessionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.UUID;
@@ -48,6 +47,19 @@ public class UserController {
                 .body(new LoginResponse(user.getId(), user.getNickname(), user.getDepartment().getName()));
     }
 
+    @GetMapping("/user/{userIndex}")
+    public ResponseEntity<ReadUserResponse> readUser(
+            @PathVariable Long userIndex) {
+        User user = userService.getById(userIndex);
 
-    // TODO: 유저 아이디로 유저 정보 조회하기
+        return ResponseEntity.ok(
+                new ReadUserResponse(
+                        user.getId(),
+                        user.getDepartment().getName(),
+                        user.getEmail(),
+                        user.getNickname(),
+                        user.getSchoolYear(),
+                        user.getAge(),
+                        user.isGender()));
+    }
 }
