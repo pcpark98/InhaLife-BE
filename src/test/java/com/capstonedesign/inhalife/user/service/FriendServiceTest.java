@@ -6,6 +6,7 @@ import com.capstonedesign.inhalife.user.domain.Friend;
 import com.capstonedesign.inhalife.user.domain.User;
 import com.capstonedesign.inhalife.user.dto.response.ReadFriendResponse;
 import com.capstonedesign.inhalife.user.exception.DuplicatedFriendException;
+import com.capstonedesign.inhalife.user.exception.DuplicatedFriendRequestException;
 import com.capstonedesign.inhalife.user.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -117,6 +118,49 @@ public class FriendServiceTest {
         // then
         // DuplicatedFriendException 발생
     }
+
+    @Test(expected = DuplicatedFriendRequestException.class)
+    public void 이미_친구요청을_보낸_유저에게_또_친구신청_오류() {
+        // given
+        // configure department
+        Department 학과 = new Department("컴퓨터공학과");
+        departmentRepository.save(학과);
+
+        // configure user info
+        User 유저1 = new User(
+                "email@email.com",
+                "password",
+                학과,
+                "nickname",
+                1,
+                20,
+                true
+        );
+        User 유저2 = new User(
+                "email2@email.com",
+                "password2",
+                학과,
+                "nickname2",
+                1,
+                20,
+                true
+        );
+        userRepository.save(유저1);
+        userRepository.save(유저2);
+
+        // configure friend relationship
+        friendService.requestFriend(유저1, 유저2);
+
+
+        // when
+        friendService.requestFriend(유저1, 유저2);
+
+
+        // then
+        // DuplicatedFriendRequestException 발생
+    }
+
+
 
     //TODO: 없는 친구 요청에 대한 수락 오류
 
