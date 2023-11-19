@@ -41,4 +41,16 @@ public class FriendService {
 
         return friend.get();
     }
+
+    @Transactional
+    public Long acceptFriend(User fromUser, User toUser) {
+        Optional<Friend> friend = friendRepository.findByFromUserIndexAndToUserIndex(toUser.getId(), fromUser.getId());
+
+        if(!friend.isPresent()) throw new NotExistedFriendException();
+        if(friend.get().isFriend()) throw new DuplicatedFriendException();
+
+        friend.get().setFriend(true);
+
+        return friend.get().getId();
+    }
 }

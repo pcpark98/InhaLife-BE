@@ -2,6 +2,7 @@ package com.capstonedesign.inhalife.user.service;
 
 import com.capstonedesign.inhalife.department.domain.Department;
 import com.capstonedesign.inhalife.department.repository.DepartmentRepository;
+import com.capstonedesign.inhalife.user.domain.Friend;
 import com.capstonedesign.inhalife.user.domain.User;
 import com.capstonedesign.inhalife.user.repository.UserRepository;
 import org.junit.Test;
@@ -26,7 +27,7 @@ public class FriendServiceTest {
     UserRepository userRepository;
 
     @Test
-    public void 친구_요청_및_조회() {
+    public void 친구_요청_조회_수락() {
         // given
         // configure department
         Department 학과 = new Department("컴퓨터공학과");
@@ -57,10 +58,17 @@ public class FriendServiceTest {
 
         // when
         Long 생성한_아이디 = friendService.requestFriend(유저1, 유저2);
-        Long 조회한_아이디 = friendService.getByFromUserIdAndToUserId(유저1.getId(), 유저2.getId()).getId();
+        Friend 조회한_친구 = friendService.getByFromUserIdAndToUserId(유저1.getId(), 유저2.getId());
 
+        boolean 신청_이후_친구여부 = 조회한_친구.isFriend();
+
+        friendService.acceptFriend(유저2, 유저1);
+
+        boolean 수락_이후_친구여부 = 조회한_친구.isFriend();
 
         // then
-        assertEquals(조회한_아이디, 생성한_아이디);
+        assertEquals(조회한_친구.getId(), 생성한_아이디);
+        assertEquals(false, 신청_이후_친구여부);
+        assertEquals(true, 수락_이후_친구여부);
     }
 }
