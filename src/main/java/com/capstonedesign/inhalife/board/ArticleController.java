@@ -4,6 +4,8 @@ import com.capstonedesign.inhalife.board.domain.Article;
 import com.capstonedesign.inhalife.board.domain.Board;
 import com.capstonedesign.inhalife.board.dto.request.CreateArticleRequest;
 import com.capstonedesign.inhalife.board.dto.response.ReadArticleResponse;
+import com.capstonedesign.inhalife.board.service.ArticleFavoriteService;
+import com.capstonedesign.inhalife.board.service.ArticleImgService;
 import com.capstonedesign.inhalife.board.service.ArticleService;
 import com.capstonedesign.inhalife.board.service.BoardService;
 import com.capstonedesign.inhalife.user.domain.User;
@@ -25,6 +27,8 @@ public class ArticleController {
     private final ArticleService articleService;
     private final UserService userService;
     private final BoardService boardService;
+    private final ArticleImgService articleImgService;
+    private final ArticleFavoriteService articleFavoriteService;
 
     @PostMapping(value = "/board/{boardIndex}/article", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<Void> createArticle(
@@ -60,7 +64,7 @@ public class ArticleController {
         User user = userService.getById(userId);
         Article article = articleService.getById(articleIndex);
 
-        List<String> tempImgUrl = new ArrayList<>();
+        List<String> imgUrlList = articleImgService.getAllUrlByArticleId(article.getId());
 
         return ResponseEntity.ok(
                 new ReadArticleResponse(
@@ -71,9 +75,10 @@ public class ArticleController {
                         article.getBoard().getName(),
                         article.getTitle(),
                         article.getContents(),
-                        tempImgUrl,
+                        imgUrlList,
                         article.getCreatedAt(),
-                        articleService.isWrittenBy(user, article)
+                        articleService.isWrittenBy(user, article),
+                        articleFavoriteService.getFavoriteCountOfArticle(article.getId())
                 )
         );
     }
