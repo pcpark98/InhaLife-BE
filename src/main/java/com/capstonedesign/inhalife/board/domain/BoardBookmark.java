@@ -2,6 +2,7 @@ package com.capstonedesign.inhalife.board.domain;
 
 import com.capstonedesign.inhalife.user.domain.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
+@NoArgsConstructor
 @Getter @Setter
 @Table(
         uniqueConstraints = {
@@ -30,4 +32,9 @@ public class BoardBookmark {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "board_index")
     private Board board;
+
+    public BoardBookmark(User user, Board board) {
+        this.user = user;
+        this.board = board;
+    }
 }
