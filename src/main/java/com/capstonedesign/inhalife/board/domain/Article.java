@@ -2,6 +2,7 @@ package com.capstonedesign.inhalife.board.domain;
 
 import com.capstonedesign.inhalife.user.domain.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -10,11 +11,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
+@NoArgsConstructor
 @Getter @Setter
 public class Article {
 
@@ -44,8 +47,15 @@ public class Article {
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "article")
-    private List<ArticleImg> articleImgs;
+    private List<ArticleImg> articleImgs = new ArrayList<>();
 
     @OneToMany(mappedBy = "article")
-    private List<ArticleComment> articleComments;
+    private List<ArticleComment> articleComments = new ArrayList<>();
+
+    public Article(User user, Board board, String title, String contents) {
+        this.user = user;
+        this.board = board;
+        this.title = title;
+        this.contents = contents;
+    }
 }
