@@ -38,7 +38,7 @@ public class BoardBookmarkController {
     // TODO: 게시판 북마크 조회 DTO 변경
     @GetMapping("/user/{userIndex}/board-bookmark")
     public ResponseEntity<List<ReadBoardResponse>> readUsersBoardBookmark(
-            @RequestParam Long userIndex,
+            @PathVariable Long userIndex,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         User user = userService.getById(userIndex);
@@ -50,7 +50,7 @@ public class BoardBookmarkController {
 
     @DeleteMapping("/board-bookmark/{boardBookmarkIndex}")
     public ResponseEntity<Void>  deleteBoardBookmark(
-            @RequestParam Long boardBookmarkIndex) {
+            @PathVariable Long boardBookmarkIndex) {
         BoardBookmark boardBookmark = boardBookmarkService.getById(boardBookmarkIndex);
 
         boardBookmarkService.deleteBoardBookmark(boardBookmark);

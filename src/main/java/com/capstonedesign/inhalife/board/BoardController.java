@@ -37,7 +37,7 @@ public class BoardController {
 
     @DeleteMapping("/board/{boardIndex}")
     public ResponseEntity<Void> deleteBoard(
-            @RequestParam Long boardIndex) {
+            @PathVariable Long boardIndex) {
         boardService.deleteBoard(boardIndex);
 
         return ResponseEntity.ok().build();

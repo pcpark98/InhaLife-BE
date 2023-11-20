@@ -80,7 +80,7 @@ public class ArticleController {
 
     @DeleteMapping("/article/{articleIndex}")
     public ResponseEntity<Void> deleteArticle(
-            @RequestParam Long articleIndex) {
+            @PathVariable Long articleIndex) {
         Article article = articleService.getById(articleIndex);
 
         articleService.deleteArticle(article);
