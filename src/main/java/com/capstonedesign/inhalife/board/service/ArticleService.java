@@ -4,6 +4,7 @@ import com.capstonedesign.inhalife.board.domain.Article;
 import com.capstonedesign.inhalife.board.domain.ArticleImg;
 import com.capstonedesign.inhalife.board.dto.response.ReadArticleResponse;
 import com.capstonedesign.inhalife.board.exception.NotExistedArticleException;
+import com.capstonedesign.inhalife.board.repository.ArticleFavoriteRepository;
 import com.capstonedesign.inhalife.board.repository.ArticleRepository;
 import com.capstonedesign.inhalife.user.domain.User;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ import java.util.Optional;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
+    private final ArticleFavoriteRepository articleFavoriteRepository;
 
     @Transactional
     public Long createArticle(Article article, List<MultipartFile> images) {
@@ -66,7 +68,8 @@ public class ArticleService {
                             article.getContents(),
                             articleImgUrlList,
                             article.getCreatedAt(),
-                            true
+                            true,
+                            articleFavoriteRepository.findAllByArticleId(article.getId()).size()
                     )
             );
         });
@@ -97,7 +100,8 @@ public class ArticleService {
                             article.getContents(),
                             articleImgUrlList,
                             article.getCreatedAt(),
-                            true
+                            true,
+                            articleFavoriteRepository.findAllByArticleId(article.getId()).size()
                     )
             );
         });
