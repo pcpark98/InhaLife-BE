@@ -2,7 +2,7 @@ package com.capstonedesign.inhalife.board.service;
 
 import com.capstonedesign.inhalife.board.domain.Board;
 import com.capstonedesign.inhalife.board.domain.BoardBookmark;
-import com.capstonedesign.inhalife.board.dto.response.ReadBoardResponse;
+import com.capstonedesign.inhalife.board.dto.response.ReadBoardBookmarkResponse;
 import com.capstonedesign.inhalife.board.exception.DuplicatedBoardBookmarkException;
 import com.capstonedesign.inhalife.board.exception.NotExistedBoardBookmarkException;
 import com.capstonedesign.inhalife.board.repository.BoardBookmarkRepository;
@@ -85,8 +85,8 @@ public class BoardBookmarkServiceTest {
         boardBookmarkService.createBoardBookmark(게시판_즐겨찾기3);
 
         BoardBookmark 게시판_즐겨찾기_조회 = boardBookmarkService.getById(게시판_즐겨찾기.getId());
-        List<ReadBoardResponse> 유저1이_즐겨찾기한_게시판 = boardBookmarkService.getByUserId(유저1.getId(), 0, 10);
-        List<ReadBoardResponse> 유저2가_즐겨찾기한_게시판 = boardBookmarkService.getByUserId(유저2.getId(), 0, 10);
+        List<ReadBoardBookmarkResponse> 유저1이_즐겨찾기한_게시판 = boardBookmarkService.getByUserId(유저1.getId(), 0, 10);
+        List<ReadBoardBookmarkResponse> 유저2가_즐겨찾기한_게시판 = boardBookmarkService.getByUserId(유저2.getId(), 0, 10);
         boolean 유저1이_게시판을_좋아요했는가 = boardBookmarkService.isBookmark(유저1, 게시판);
         boolean 유저1이_게시판2를_좋아요했는가 = boardBookmarkService.isBookmark(유저1, 게시판2);
         boolean 유저2가_게시판을_좋아요했는가 = boardBookmarkService.isBookmark(유저2, 게시판);

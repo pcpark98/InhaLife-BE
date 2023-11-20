@@ -3,6 +3,7 @@ package com.capstonedesign.inhalife.board;
 import com.capstonedesign.inhalife.board.domain.Board;
 import com.capstonedesign.inhalife.board.domain.BoardBookmark;
 import com.capstonedesign.inhalife.board.dto.request.CreateBoardBookmarkRequest;
+import com.capstonedesign.inhalife.board.dto.response.ReadBoardBookmarkResponse;
 import com.capstonedesign.inhalife.board.dto.response.ReadBoardResponse;
 import com.capstonedesign.inhalife.board.service.BoardBookmarkService;
 import com.capstonedesign.inhalife.board.service.BoardService;
@@ -35,15 +36,14 @@ public class BoardBookmarkController {
         return ResponseEntity.ok().build();
     }
 
-    // TODO: 게시판 북마크 조회 DTO 변경
     @GetMapping("/user/{userIndex}/board-bookmark")
-    public ResponseEntity<List<ReadBoardResponse>> readUsersBoardBookmark(
+    public ResponseEntity<List<ReadBoardBookmarkResponse>> readUsersBoardBookmark(
             @PathVariable Long userIndex,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         User user = userService.getById(userIndex);
 
-        List<ReadBoardResponse> boardList = boardBookmarkService.getByUserId(userIndex, page, size);
+        List<ReadBoardBookmarkResponse> boardList = boardBookmarkService.getByUserId(userIndex, page, size);
 
         return ResponseEntity.ok(boardList);
     }

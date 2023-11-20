@@ -2,6 +2,7 @@ package com.capstonedesign.inhalife.board.service;
 
 import com.capstonedesign.inhalife.board.domain.Board;
 import com.capstonedesign.inhalife.board.domain.BoardBookmark;
+import com.capstonedesign.inhalife.board.dto.response.ReadBoardBookmarkResponse;
 import com.capstonedesign.inhalife.board.dto.response.ReadBoardResponse;
 import com.capstonedesign.inhalife.board.exception.DuplicatedBoardBookmarkException;
 import com.capstonedesign.inhalife.board.exception.NotExistedBoardBookmarkException;
@@ -39,13 +40,14 @@ public class BoardBookmarkService {
         return boardBookmark.get();
     }
 
-    public List<ReadBoardResponse> getByUserId(Long id, int page, int size) {
-        List<ReadBoardResponse> boardList = new ArrayList<>();
+    public List<ReadBoardBookmarkResponse> getByUserId(Long id, int page, int size) {
+        List<ReadBoardBookmarkResponse> boardList = new ArrayList<>();
 
         List<BoardBookmark> boardBookmarkList = boardBookmarkRepository.findByUserId(id, page, size);
         boardBookmarkList.forEach(boardBookmark -> {
             boardList.add(
-                    new ReadBoardResponse(
+                    new ReadBoardBookmarkResponse(
+                            boardBookmark.getId(),
                             boardBookmark.getBoard().getId(),
                             boardBookmark.getBoard().getName()
                     )
