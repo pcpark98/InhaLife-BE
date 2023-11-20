@@ -15,6 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -59,10 +63,10 @@ public class ArticleServiceTest {
 
         // configure Article
         Article 게시글 = new Article(유저1, 게시판, "제목", "내용");
-
+        List<MultipartFile> 이미지 = new ArrayList<>();
 
         // when
-        articleService.createArticle(게시글);
+        articleService.createArticle(게시글, 이미지);
         Article 조회한_게시글 = articleService.getById(게시글.getId());
 
 

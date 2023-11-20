@@ -9,10 +9,13 @@ import com.capstonedesign.inhalife.board.service.BoardService;
 import com.capstonedesign.inhalife.user.domain.User;
 import com.capstonedesign.inhalife.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,16 +27,17 @@ public class ArticleController {
     private final UserService userService;
     private final BoardService boardService;
 
-    @PostMapping("/board/{boardIndex}/article")
+    @PostMapping(value = "/board/{boardIndex}/article", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<Void> createArticle(
             @PathVariable Long boardIndex,
-            @RequestBody @Valid CreateArticleRequest request) {
+            @RequestPart(value = "request") @Valid CreateArticleRequest request,
+            @RequestPart(value = "images", required = false)List<MultipartFile> images) {
         User user = userService.getById(request.getUserId());
         Board board = boardService.getById(boardIndex);
 
         Article article = new Article(user, board, request.getTitle(), request.getContents());
 
-        articleService.createArticle(article);
+        articleService.createArticle(article, images);
 
         return ResponseEntity.ok().build();
     }

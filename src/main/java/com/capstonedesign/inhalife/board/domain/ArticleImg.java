@@ -1,6 +1,7 @@
 package com.capstonedesign.inhalife.board.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
+@NoArgsConstructor
 @Getter @Setter
 public class ArticleImg {
 
@@ -30,4 +32,9 @@ public class ArticleImg {
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    public ArticleImg(Article article, String imgUrl) {
+        this.article = article;
+        this.imgUrl = imgUrl;
+    }
 }

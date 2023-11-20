@@ -46,7 +46,7 @@ public class Article {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ArticleImg> articleImgs = new ArrayList<>();
 
     @OneToMany(mappedBy = "article")
