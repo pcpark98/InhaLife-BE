@@ -3,7 +3,6 @@ package com.capstonedesign.inhalife.board;
 import com.capstonedesign.inhalife.board.domain.Article;
 import com.capstonedesign.inhalife.board.domain.ArticleFavorite;
 import com.capstonedesign.inhalife.board.dto.request.CreateArticleFavoriteRequest;
-import com.capstonedesign.inhalife.board.dto.response.ReadArticleResponse;
 import com.capstonedesign.inhalife.board.dto.response.ReadFavoriteArticleResponse;
 import com.capstonedesign.inhalife.board.service.ArticleFavoriteService;
 import com.capstonedesign.inhalife.board.service.ArticleService;

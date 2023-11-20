@@ -2,6 +2,7 @@ package com.capstonedesign.inhalife.board.domain;
 
 import com.capstonedesign.inhalife.user.domain.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
+@NoArgsConstructor
 @Getter @Setter
 @Table(
         uniqueConstraints = {
@@ -38,4 +40,9 @@ public class ArticleBookmark {
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    public ArticleBookmark(User user, Article article) {
+        this.user = user;
+        this.article = article;
+    }
 }

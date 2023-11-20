@@ -3,7 +3,6 @@ package com.capstonedesign.inhalife.board.service;
 import com.capstonedesign.inhalife.board.domain.Article;
 import com.capstonedesign.inhalife.board.domain.ArticleFavorite;
 import com.capstonedesign.inhalife.board.domain.ArticleImg;
-import com.capstonedesign.inhalife.board.dto.response.ReadArticleResponse;
 import com.capstonedesign.inhalife.board.dto.response.ReadFavoriteArticleResponse;
 import com.capstonedesign.inhalife.board.exception.DuplicatedArticleFavoriteException;
 import com.capstonedesign.inhalife.board.exception.NotExistedArticleFavoriteException;
