@@ -35,6 +35,7 @@ public class BoardBookmarkController {
         return ResponseEntity.ok().build();
     }
 
+    // TODO: 게시판 북마크 조회 DTO 변경
     @GetMapping("/user/{userIndex}/board-bookmark")
     public ResponseEntity<List<ReadBoardResponse>> readUsersBoardBookmark(
             @RequestParam Long userIndex,
