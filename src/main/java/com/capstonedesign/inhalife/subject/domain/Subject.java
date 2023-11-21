@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
@@ -54,11 +55,30 @@ public class Subject {
     private Boolean isOnline;
 
     @OneToMany(mappedBy = "subject")
-    private List<SubjectTaken> subjectTakenList;
+    private List<SubjectTaken> subjectTakenList = new ArrayList<>();
 
     @OneToMany(mappedBy = "subject")
-    private List<SubjectReview> subjectReviewList;
+    private List<SubjectReview> subjectReviewList = new ArrayList<>();
 
     @OneToMany(mappedBy = "subject")
-    private List<SubjectBookmark> subjectBookmarkList;
+    private List<SubjectBookmark> subjectBookmarkList = new ArrayList<>();
+
+    public Subject(
+            Department department,
+            Professor professor,
+            String name,
+            String subjectType,
+            boolean evaluationType,
+            int schoolYear,
+            boolean semester,
+            boolean isOnline) {
+        this.department = department;
+        this.professor = professor;
+        this.name = name;
+        this.subjectType = SubjectType.nameOf(subjectType);
+        this.evaluationType = evaluationType;
+        this.schoolYear = schoolYear;
+        this.semester = semester;
+        this.isOnline = isOnline;
+    }
 }
