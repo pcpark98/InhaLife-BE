@@ -2,17 +2,20 @@ package com.capstonedesign.inhalife.subject.domain;
 
 import com.capstonedesign.inhalife.department.domain.Department;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.FetchType.*;
 
 @Entity
+@NoArgsConstructor
 @Getter @Setter
 public class Professor {
 
@@ -30,5 +33,10 @@ public class Professor {
     private String name;
 
     @OneToMany(mappedBy = "professor")
-    private List<Subject> subjects;
+    private List<Subject> subjects = new ArrayList<>();
+
+    public Professor(Department department, String name) {
+        this.department = department;
+        this.name = name;
+    }
 }
