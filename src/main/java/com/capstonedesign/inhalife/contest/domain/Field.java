@@ -24,4 +24,8 @@ public class Field {
 
     @OneToMany(mappedBy = "field")
     private List<FieldOfContest> fieldOfContestList = new ArrayList<>();
+
+    public Field(String name) {
+        this.name = name;
+    }
 }

@@ -22,6 +22,7 @@ import java.util.UUID;
 
 @Tag(name = "유저 정보 API", description = "유저 정보 관련 API")
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -41,9 +42,11 @@ public class UserController {
     @PostMapping("/sign-up")
     public ResponseEntity<Void> signUp(
             @RequestBody @Valid SignUpRequest request) {
-        Department department = departmentService.getById(request.getDepartmentId());
+        Department department = departmentService.getByName(request.getDepartment());
 
-        User user = new User(request.getEmail(), request.getPassword(), department, request.getNickname(), request.getSchoolYear(), request.getAge(), request.isGender());
+        boolean isGender = false;
+        if(request.getGender().equals("m")) isGender = true;
+        User user = new User(request.getEmail(), request.getPassword(), department, request.getNickname(), request.getSchoolYear(), request.getAge(), isGender);
         userService.signUp(user);
 
         return ResponseEntity.ok().build();

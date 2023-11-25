@@ -32,6 +32,15 @@ public class DepartmentService {
         return department.get();
     }
 
+    public Department getByName(String name) {
+        if(name == null) throw new  NotExistedDepartmentException();
+
+        Optional<Department> department = departmentRepository.findByName(name);
+        if(!department.isPresent()) throw new NotExistedDepartmentException();
+
+        return department.get();
+    }
+
     public List<Department> getAll() {
         List<Department> departmentList = departmentRepository.findAll();
         return departmentList;

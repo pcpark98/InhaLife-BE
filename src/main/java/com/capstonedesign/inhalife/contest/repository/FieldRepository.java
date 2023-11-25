@@ -28,6 +28,11 @@ public class FieldRepository {
         return fieldList;
     }
 
+    public Optional<Field> findByName(String name) {
+        Optional<Field> field = fieldJpaRepository.findByName(name);
+        return field;
+    }
+
     public void delete(Long id) {
         fieldJpaRepository.deleteById(id);
     }

@@ -14,8 +14,8 @@ public class SignUpRequest {
     @NotBlank
     private String password;
 
-    @NotNull
-    private Long departmentId;
+    @NotBlank
+    private String department;
 
     @NotBlank
     private String nickname;
@@ -27,5 +27,5 @@ public class SignUpRequest {
     private int age;
 
     @NotNull
-    private boolean gender;
+    private String gender;
 }

@@ -28,6 +28,11 @@ public class DepartmentRepository {
         return departmentList;
     }
 
+    public Optional<Department> findByName(String name) {
+        Optional<Department> department = departmentJpaRepository.findByName(name);
+        return department;
+    }
+
     public void delete(Long id) {
         departmentJpaRepository.deleteById(id);
     }
