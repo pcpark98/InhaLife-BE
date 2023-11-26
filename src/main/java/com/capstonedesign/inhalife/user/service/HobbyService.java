@@ -38,4 +38,13 @@ public class HobbyService {
                 })
                 .collect(Collectors.toList());
     }
+
+    public Hobby getByName(String name) {
+        if(name == null) throw new NotExistedHobbyException();
+
+        Optional<Hobby> hobby = hobbyRepository.findByName(name);
+        if(!hobby.isPresent()) throw new NotExistedHobbyException();
+
+        return hobby.get();
+    }
 }

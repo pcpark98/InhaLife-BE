@@ -23,7 +23,7 @@ public class ContestRecommendController {
     // TODO: 대회 추천은 프론트에서 필드 받아오는거까지 작업 되었음.
     /*
     @PostMapping("/contest-recommend")
-    public ResponseEntity<ReadContestRecommendResponse> getContestRecommendation(
+    public ResponseEntity<List<ReadContestRecommendResponse>> getContestRecommendation(
             @RequestBody @Valid GetContestRecommendationRequest request) {
         List<Field> selectedField = new ArrayList<>();
 
@@ -32,6 +32,7 @@ public class ContestRecommendController {
             Field field = fieldService.getByName(fieldName);
             selectedField.add(field);
         });
-    }
+
      */
+
 }

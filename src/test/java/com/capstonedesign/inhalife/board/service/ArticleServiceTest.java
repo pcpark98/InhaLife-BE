@@ -66,7 +66,7 @@ public class ArticleServiceTest {
         List<MultipartFile> 이미지 = new ArrayList<>();
 
         // when
-        articleService.createArticle(게시글, 이미지);
+        articleService.createArticle(게시글);
         Article 조회한_게시글 = articleService.getById(게시글.getId());
 
 
