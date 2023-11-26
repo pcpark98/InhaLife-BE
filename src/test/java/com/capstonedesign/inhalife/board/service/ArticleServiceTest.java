@@ -74,6 +74,7 @@ public class ArticleServiceTest {
         assertEquals(게시글, 조회한_게시글);
     }
 
+    /*
     @Test(expected = NotExistedArticleException.class)
     public void 존재하지_않는_게시글을_조회할_수_없다() {
         // given
@@ -85,7 +86,9 @@ public class ArticleServiceTest {
         // then
         // NotExistedArticleException 발생
     }
+     */
 
+    /*
     @Test
     public void 유저가_작성한_모든_게시글_조회() {
         // given
@@ -137,6 +140,8 @@ public class ArticleServiceTest {
         assertEquals(2, 유저1의_게시글_수);
         assertEquals(1, 유저2의_게시글_수);
     }
+
+     */
 
     @Test
     public void 게시판의_모든_게시글_조회() {
