@@ -26,6 +26,7 @@ import java.util.List;
 
 @Tag(name = "게시글 API", description = "게시글 관련 API")
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 public class ArticleController {
 
@@ -44,17 +45,16 @@ public class ArticleController {
             @Parameter(name = "contents", description = "작성할 게시글의 내용" ),
             @Parameter(name = "images", description = "게시글에 업로드할 이미지 리스트" ),
     })
-    @PostMapping(value = "/board/{boardIndex}/article", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(value = "/board/{boardIndex}/article")
     public ResponseEntity<Void> createArticle(
             @PathVariable Long boardIndex,
-            @RequestPart(value = "request") @Valid CreateArticleRequest request,
-            @RequestPart(value = "images", required = false)List<MultipartFile> images) {
+            @RequestBody @Valid CreateArticleRequest request) {
         User user = userService.getById(request.getUserId());
         Board board = boardService.getById(boardIndex);
 
         Article article = new Article(user, board, request.getTitle(), request.getContents());
 
-        articleService.createArticle(article, images);
+        articleService.createArticle(article);
 
         return ResponseEntity.ok().build();
     }
@@ -76,6 +76,7 @@ public class ArticleController {
     }
 
 
+    /*
     @Operation(summary = "단일 게시글 조회 API", description = "특정 게시글을 조회합니다.")
     @Parameters({
             @Parameter(name = "userIndex", description = "게시글을 조회하는 유저의 id", in = ParameterIn.HEADER),
@@ -106,6 +107,8 @@ public class ArticleController {
                 )
         );
     }
+
+     */
 
     @Operation(summary = "게시글 삭제 API", description = "특정 게시글을 삭제합니다.")
     @Parameter(name = "articleIndex", description = "삭제할 게시글의 id")

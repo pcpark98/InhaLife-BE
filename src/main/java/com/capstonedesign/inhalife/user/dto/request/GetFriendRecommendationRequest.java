@@ -4,28 +4,23 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
-public class SignUpRequest {
+public class GetFriendRecommendationRequest {
 
-    @NotBlank
-    private String email;
+    @NotNull
+    private List<String> sprots;
 
-    @NotBlank
-    private String password;
+    @NotNull
+    private List<String> hobbies;
 
     @NotBlank
     private String department;
 
-    @NotBlank
-    private String nickname;
-
-    @NotNull
-    private int schoolYear;
-
     @NotNull
     private int age;
 
-    @NotNull
+    @NotBlank
     private String gender;
 }

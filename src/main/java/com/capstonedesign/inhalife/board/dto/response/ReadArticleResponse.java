@@ -18,7 +18,7 @@ public class ReadArticleResponse {
     private String title;
     private String contents;
     private List<String> articleImgUrlList;
-    private LocalDateTime createdAt;
+    private String createdAt;
     private boolean isWrittenBy;
     private int favoriteCount;
 }

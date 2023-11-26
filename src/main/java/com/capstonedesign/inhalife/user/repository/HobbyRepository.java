@@ -27,6 +27,11 @@ public class HobbyRepository {
         return hobbyJpaRepository.findAll();
     }
 
+    public Optional<Hobby> findByName(String name) {
+        Optional<Hobby> hobby = hobbyJpaRepository.findByName(name);
+        return hobby;
+    }
+
     public void delete(Long id) {
         hobbyJpaRepository.deleteById(id);
     }

@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,7 @@ public class ArticleService {
     private final ArticleFavoriteRepository articleFavoriteRepository;
 
     @Transactional
-    public Long createArticle(Article article, List<MultipartFile> images) {
+    public Long createArticle(Article article) {
 
         Long savedArticleId = articleRepository.save(article);
 
@@ -45,6 +46,7 @@ public class ArticleService {
         return article.get();
     }
 
+    /*
     public List<ReadArticleResponse> getArticleByUserId(Long userId, int page, int size) {
         List<ReadArticleResponse> responseList = new ArrayList<>();
 
@@ -77,6 +79,8 @@ public class ArticleService {
         return responseList;
     }
 
+     */
+
     public List<ReadArticleResponse> getArticleByBoardId(Long boardId, int page, int size) {
         List<ReadArticleResponse> responseList = new ArrayList<>();
 
@@ -89,6 +93,16 @@ public class ArticleService {
                 articleImgUrlList.add(articleImg.getImgUrl());
             });
 
+            java.time.LocalDate localDate = article.getCreatedAt().toLocalDate();
+
+            // 출력 형식 지정
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            // 날짜를 문자열로 변환하여 출력
+            String formattedDate = localDate.format(formatter);
+
+
+
             responseList.add(
                     new ReadArticleResponse(
                             article.getId(),
@@ -99,7 +113,7 @@ public class ArticleService {
                             article.getTitle(),
                             article.getContents(),
                             articleImgUrlList,
-                            article.getCreatedAt(),
+                            formattedDate,
                             true,
                             articleFavoriteRepository.findAllByArticleId(article.getId()).size()
                     )
